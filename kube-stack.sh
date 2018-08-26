@@ -4,15 +4,7 @@
 #moonlitcoders@gmail.com - Ren
 #automates to a great extent deployment of a Kubernetes cluster
 #additional nodes can be added using the add node option after stack deployment
-
-
 ## turn off and disable swap on all nodes - not supported at this time
-
-
-
-# Initialize variables
-
-
 
 
 
