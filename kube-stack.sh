@@ -21,27 +21,14 @@ twin_column() {
 }
 
 
-sleep_twin_column() {
-
-  sleep 0.5
-  echo "*****                                                                                                                  *****"
-
-}
-
-
 single_line() {
   echo "**************************************************************************************************************************************"
 }
 
 
 
-sleep_single_line() {
-  sleep 0.5
-  echo "*****************************************************************************************************************************"
 
-}
-
-show_menu(){
+function show_menu(){
     NORMAL=`echo "\033[m"`
     MENU=`echo "\033[36m"` #Blue
     NUMBER=`echo "\033[33m"` #yellow
@@ -99,7 +86,7 @@ function return_menu(){
 }
 
 
-check_packages(){
+function check_packages(){
   echo
   echo -e "${NUMBER}    Please standby ....${NORMAL}"
   echo
@@ -124,7 +111,7 @@ check_packages(){
 }
 
 
-install_package_dependency() {
+function install_package_dependency() {
 
   ## install and configure golang, docker 1.13+, git
   ##
@@ -192,7 +179,7 @@ install_package_dependency() {
 }
 
 
-install_kubeadm_toolbox(){
+function install_kubeadm_toolbox(){
 echo
 echo
 twin_line
@@ -265,7 +252,7 @@ esac
 
 }
 
-destroy_cluster(){
+function destroy_cluster(){
 echo
 echo
 twin_line
@@ -327,7 +314,7 @@ esac
 }
 
 
-reset_cluster(){
+function reset_cluster(){
 echo
 echo
 twin_line
@@ -397,7 +384,7 @@ esac
 }
 
 
-deploy_cluster(){
+function deploy_cluster(){
 echo
 echo
 twin_line
