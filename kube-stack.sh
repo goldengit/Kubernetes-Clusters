@@ -613,7 +613,7 @@ while [ opt != '' ]
         7)  clear;
             option_picked "Option 7 picked, Add Node to existing Cluster...";
             echo
-            echo "Adding Node..."
+            echo "This option does not yet work.. you can join a node using the join command"
             sleep 3
             return_menu
             show_menu;
