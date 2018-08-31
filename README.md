@@ -63,7 +63,7 @@ $ sudo apt-get update && sudo apt-get upgrade
 
 * Then proceed with cloning this repo to all your nodes(including that which serve as your master) or copy the kube-stack.sh script to each machine and run from there ( ./kube-stack.sh )
 
-* You made need to run the script as root for option 3 (Install Kubeadm toolbox)
+* You may need to run the script as root for option 3 (Install Kubeadm toolbox)
 
 * Run through the script options and complete steps 1-3 on all hosts. Step 6 is to be run on the Master node only. It will output instructions for joining your nodes to it at the end.
 

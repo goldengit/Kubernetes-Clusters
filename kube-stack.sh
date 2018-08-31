@@ -172,7 +172,6 @@ function install_package_dependency() {
   echo
   echo "Note: User that ran this configuration has been added to the docker group to remove the need to sudo any docker commands"
   echo "You should log out and back in for the changes to take effect..."
-  sleep 1
   return_menu
   show_menu;
 
