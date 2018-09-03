@@ -232,7 +232,6 @@ case "$response" in
         echo
         echo
         echo "Cancelling Kubeadm Toolbox install..."
-        sleep 2
         return_menu
         show_menu;
         ;;
@@ -266,18 +265,14 @@ case "$response" in
         single_line
         echo -e "${RED_TEXT} Draining node and all resources...   ${NORMAL}"
         single_line
-        sleep 2
         kubectl drain $nodename1 --delete-local-data --force --ignore-daemonsets
-        sleep 2
         echo
         echo
         single_line
         echo -e "${RED_TEXT} Node is deleting...      ${NORMAL}"
         single_line
-        sleep 2
         echo
         kubectl delete node $nodename1
-        sleep 2
         echo
         echo
         echo
@@ -285,7 +280,6 @@ case "$response" in
         echo -e "${RED_TEXT} Node has been drained and deleted   ${NORMAL}"
         single_line
         #source ~/.profile
-        sleep 2
         return_menu
         show_menu;
         ;;
@@ -293,7 +287,6 @@ case "$response" in
         echo
         echo
         echo "Aborting..."
-        sleep 2
         return_menu
         show_menu;
         ;;
@@ -330,9 +323,7 @@ case "$response" in
         echo -e "${RED_TEXT} resetting ...   ${NORMAL}"
         single_line
         echo
-        sleep 2
         sudo kubeadm reset
-        sleep 2
         echo
         single_line
         echo -e "${RED_TEXT} Node was reset... ${NORMAL}"
@@ -343,18 +334,15 @@ case "$response" in
         echo -e "${RED_TEXT} Now deleting .kube configuration folder in your home directory..   ${NORMAL}"
         single_line
         echo
-        sleep 2
         cd ~
         sudo rm -rv .kube
         rm -rv ~/heapster
         rm -v dashboard-admin.yaml
         echo
-        sleep 2
         single_line
         echo -e "${RED_TEXT} Node is clean and reset - repeat with all other nodes and lastly your master node. ${NORMAL}"
         single_line
         echo
-        sleep 2
         return_menu
         show_menu;
         ;;
@@ -362,7 +350,6 @@ case "$response" in
   *)
         echo
         echo "Aborting..."
-        sleep 2
         return_menu
         show_menu;
         ;;
@@ -398,14 +385,12 @@ case "$response" in
         echo -e "${RED_TEXT} Making sure swap is disabled - this is mandatory as swap is not supported  ${NORMAL}"
         echo
         single_line
-        sleep 2
         echo
         echo
         sudo cat /proc/swaps
         echo
         echo
         sudo swapoff -a
-        sleep 3
         echo
         echo
         twin_line
@@ -418,17 +403,14 @@ case "$response" in
         echo
         echo -e "${RED_TEXT}Please enter the advertise address ip: ${NORMAL}"
         read masterIp
-        sleep 2
         echo
         sudo kubeadm init --pod-network-cidr=10.244.0.0/16 --apiserver-advertise-address=$masterIp
-        sleep 5
         echo
         echo
         single_line
         echo
         echo -e "${RED_TEXT} NOTE - you will not need to complete the steps above for creating the .kube configuration
         directory as it will be created for you automatically in the next step - please standby... ${NORMAL}"
-        sleep 5
         echo
         echo
         single_line
@@ -436,7 +418,6 @@ case "$response" in
         echo -e "${RED_TEXT} Creating Kubernetes config directory in ~/.kube... ${NORMAL}"
         echo
         echo
-        sleep 2
         mkdir -pv $HOME/.kube
         sudo cp -rfv /etc/kubernetes/admin.conf $HOME/.kube/config
         sudo chown $(id -u):$(id -g) $HOME/.kube/config
@@ -446,14 +427,11 @@ case "$response" in
         echo -e "${RED_TEXT} Completing Master Node install and initializing... ${NORMAL}"
         echo
         echo
-        sleep 2
         echo -e "${RED_TEXT} Please standby..... ${NORMAL}"
-        sleep 3
         single_line
         echo
         echo -e "${RED_TEXT} Creating and initializing Pod network (This will deploy Calico Canal network) ${NORMAL}"
         echo -e "${RED_TEXT} Please standby..... ${NORMAL}"
-        sleep 3
         echo
         echo
         ## Deploy Calico project Canal Pod network - can apply various others to work with Kubernetes cluster
@@ -465,9 +443,7 @@ case "$response" in
         single_line
         echo -e "${RED_TEXT} Cloning heapster to your home directory (~heapster)..... ${NORMAL}"
         echo
-        sleep 3
         cd ~
-        sleep 2
         ## Add Heapster packages for charts and graphs in Kubernetes Dashboard
         git clone https://github.com/kubernetes/heapster
         kubectl create -f ~/heapster/deploy/kube-config/influxdb/
@@ -486,17 +462,14 @@ case "$response" in
         cd ~/05ada26c02fd09f335580ba851252cfb
         cp dashboard-admin.yaml ~/
         sudo rm -rv ~/05ada26c02fd09f335580ba851252cfb
-        sleep 3
         cd ~
         kubectl apply -f dashboard-admin.yaml
         kubectl create clusterrolebinding add-on-cluster-admin --clusterrole=cluster-admin --serviceaccount=kube-system:default
-        sleep 4
         echo
         single_line
         echo -e "${RED_TEXT} Getting Token secret (used for accesing dashboard) and join command to add your nodes to this master ${NORMAL}"
         echo
         echo
-        sleep 3
         single_line
         echo -e "${RED_TEXT} Copy the command below, log in to each of your nodes(the ones you want to add to the cluster), switch to root (sudo su - ), ${NORMAL}"
         echo -e "${RED_TEXT} and paste the command into the terminal for each node.  ${NORMAL}"
@@ -514,7 +487,6 @@ case "$response" in
   *)
         echo
         echo "Aborting..."
-        sleep 2
         return_menu
         show_menu;
         ;;
@@ -540,7 +512,6 @@ while [ opt != '' ]
             echo -e "${RED_TEXT} Goodbye! ${NORMAL}"
             echo
             single_line
-            sleep 2
             clear;
             exit;
     else
@@ -550,14 +521,12 @@ while [ opt != '' ]
         	  option_picked "Option 1 Picked, Checking for installed required packages....";
             echo
             check_packages
-			      sleep 1
 			      ;;
 
         2) clear;
             option_picked "Option 2 Picked, Begin Cluster Pre-requisite Installs/Configuration....";
             echo
             install_package_dependency
-            sleep 1
             ;;
 
 
@@ -567,7 +536,6 @@ while [ opt != '' ]
             echo
             echo "This option needs to be run on your master + all nodes... "
             echo "Start with your master node first, then run on nodes"
-            sleep 3
             install_kubeadm_toolbox
             ;;
 
@@ -578,7 +546,6 @@ while [ opt != '' ]
             echo
 			      echo "Stack uninstalling....."
             destroy_cluster
-            sleep 1
             ;;
 
 
@@ -586,16 +553,13 @@ while [ opt != '' ]
             option_picked "Option 5 picked, Reset Kubernetes Cluster...";
             echo
     			  echo "Resetting Cluster...."
-            sleep 3
             reset_cluster
-            sleep 1
             ;;
 
         6)  clear;
             option_picked "Option 6 picked, Deploy Kubernetes Cluster...";
             echo
             echo "Building Master-Node and starting up pods... "
-            sleep 3
             deploy_cluster
             ;;
 
@@ -603,7 +567,6 @@ while [ opt != '' ]
             option_picked "Option 7 picked, Add Node to existing Cluster...";
             echo
             echo "This option does not yet work.. you can join a node using the join command"
-            sleep 3
             return_menu
             show_menu;
             ;;
