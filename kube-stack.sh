@@ -123,28 +123,22 @@ function install_package_dependency() {
   single_line
   echo -e "${RED_TEXT}***** Installing docker 17.03+ if not already installed..                                            *****${NORMAL}"
   single_line
-  sleep 2
   sudo apt-get install -y docker.io
-  sleep 3
   sudo groupadd docker
   sudo usermod -aG docker $USER
   single_line
   echo -e "${RED_TEXT}***** Installing latest git version if not already installed..                                       *****${NORMAL}"
   single_line
   sudo apt-get install -y git
-  sleep 3
   single_line
   echo -e "${RED_TEXT}***** Adding golang repo and installing latest binary                                                *****${NORMAL}"
   single_line
   sudo add-apt-repository ppa:hnakamur/golang-1.10
-  sleep 2
   sudo apt update
-  sleep 3
   sudo apt-get install -y golang-go golang-1.10-doc
   single_line
   echo -e "${RED_TEXT}***** Adding go binary to your .profile so it is in your PATH..                                      *****${NORMAL}"
   single_line
-  sleep 2
   echo "export PATH=\$PATH:/usr/lib/go-1.10/bin" >> ~/.profile
   source ~/.profile
   clear
@@ -156,7 +150,6 @@ function install_package_dependency() {
   single_line
   echo
   echo
-  sleep 2
   echo "Docker Version:"
   echo
   echo
@@ -195,7 +188,6 @@ case "$response" in
     [yY][eE][sS]|[yY])
         echo
         echo "Initiating Kubeadm toolbox install - Please Wait...."
-        sleep 2
         echo
         echo
         single_line
@@ -206,7 +198,6 @@ case "$response" in
         sudo curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
         echo
         echo
-        sleep 2
         single_line
         echo -e "${RED_TEXT}***** adding kubernetes packages to repo list......                                             *****${NORMAL}"
         single_line
@@ -218,7 +209,6 @@ case "$response" in
         single_line
         echo
         swapoff -a
-        sleep 2
         echo
         single_line
         echo -e "${RED_TEXT}***** updating package lists from repos & installing kubeadm toolkit..                          *****${NORMAL}"
