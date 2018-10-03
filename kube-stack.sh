@@ -418,6 +418,8 @@ case "$response" in
         echo -e "${RED_TEXT} Creating Kubernetes config directory in ~/.kube... ${NORMAL}"
         echo
         echo
+	## Creates hidden .kube directory in users home folder - contains all kubernetes cluster configurations
+	## for Master
         mkdir -pv $HOME/.kube
         sudo cp -rfv /etc/kubernetes/admin.conf $HOME/.kube/config
         sudo chown $(id -u):$(id -g) $HOME/.kube/config
@@ -463,6 +465,7 @@ case "$response" in
         cp dashboard-admin.yaml ~/
         sudo rm -rv ~/05ada26c02fd09f335580ba851252cfb
         cd ~
+	## Add dashboard package
         kubectl apply -f dashboard-admin.yaml
         kubectl create clusterrolebinding add-on-cluster-admin --clusterrole=cluster-admin --serviceaccount=kube-system:default
         echo
@@ -475,6 +478,7 @@ case "$response" in
         echo -e "${RED_TEXT} and paste the command into the terminal for each node.  ${NORMAL}"
         echo -e "${RED_TEXT} This will add the nodes to your cluster... ${NORMAL}"
         echo
+	## Prints the command that you use to join your nodes to master
         kubeadm token create --print-join-command
         echo
         echo
