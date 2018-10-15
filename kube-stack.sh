@@ -5,7 +5,7 @@
 #automates to a great extent deployment of a Kubernetes cluster
 #additional nodes can be added using the add node option after stack deployment
 ## turn off and disable swap on all nodes - not supported at this time
-
+## Work in progress - still need to add some functionality
 
 
 
