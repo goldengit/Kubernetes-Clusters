@@ -10,7 +10,7 @@
 
 
 #Functions
-
+# Organizes rows and processes to keep things clean and easy to read
 twin_line() {
   echo "**************************************************************************************************************************************"
   echo "**************************************************************************************************************************************"
@@ -27,7 +27,7 @@ single_line() {
 
 
 
-
+# Main function generates main menu options
 function show_menu(){
     NORMAL=`echo "\033[m"`
     MENU=`echo "\033[36m"` #Blue
@@ -85,7 +85,7 @@ function return_menu(){
 	clear
 }
 
-
+# checks if dependencies are installed already
 function check_packages(){
   echo
   echo -e "${NUMBER}    Please standby ....${NORMAL}"
@@ -315,7 +315,7 @@ case "$response" in
 
         echo
         echo
-        echo "Please enter name of your node - start with your nodes first then do master last:"
+        echo "Please enter the name of your Node - start with your nodes first then do master last:"
         echo
         read nodename
         echo
